@@ -1,3 +1,28 @@
+.container {
+  width: 600px;
+  height: auto;
+  margin: 20px auto;
+  border: black solid 1px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
 
+.slots {
+  width: 276.5px;
+  height: 237px;
+  padding: 23.7px;
+  border: black solid 1px;
+  display: flex;
+  justify-content: space-between;
+}
+.slots .reel {
+  border: black solid 1px;
+  width: 79px;
+  height: 237px;
+  background-image: url(https://assets.codepen.io/439000/slotreel.webp);
+  background-repeat: repeat-y;
+  background-position: 0 0;
+}
 
 /*# sourceMappingURL=style.css.map */
