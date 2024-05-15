@@ -1,5 +1,5 @@
+const rollBtn = document.querySelector(".spinBtn")
 
-const icon_width = 79;
 const icon_height = 79;
 const num_icons = 9;
 const time_per_icon = 100;
@@ -10,6 +10,8 @@ let fruit_indexes = [0, 0, 0];
 * grape = 3 ; orange = 4 ; bell = 5 ;
 * bar = 6 ; lemon = 7 ; melon = 8
 *  */
+
+let slotsMoney = 2000
 
 const roll = (reel, offset = 0) => {
     // Calculation for rotation
@@ -39,19 +41,14 @@ function rollAll() {
     // Select reels
     const reelsList = document.querySelectorAll('.slots > .reel');
 
+    // Promise.all waits until all promises resolve, then returns result as an array
+    // [...reelsList] converts from NodeList into array. Worth remembering
     Promise
         .all( [...reelsList].map((reel, index) => roll(reel, index)) )
         .then((result) => {
-            fruit_indexes = [...result]
+            result.forEach((icon, index) => fruit_indexes[index] = (fruit_indexes[index] + icon)%num_icons);
             console.log(fruit_indexes)
-            console.log(result)
         })
-
-    // Convert NodeList into array
-    /*[...reelsList].map((reel, index) => {
-        console.log(reel, index)
-        roll(reel, index)
-    })*/
 }
 
-rollAll();
+rollBtn.onclick = () => rollAll();

@@ -5,11 +5,14 @@ $num_icons: 9;
 .container {
   width: 600px;
   height: auto;
-  margin: 20px auto;
+  margin: 10px auto;
   border: black solid 1px;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  padding: 10px;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .slots {
@@ -26,5 +29,24 @@ $num_icons: 9;
     background-image: url(https://assets.codepen.io/439000/slotreel.webp);
     background-repeat: repeat-y;
     background-position: 0 0;
+  }
+}
+
+h2 {
+  text-align: center;
+}
+
+.spinBtn {
+  background-color: darkred;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 24px;
+  width: 100px;
+  text-align: center;
+  transition: 0.2s;
+  &:hover {
+    background-color: #0d6efd;
   }
 }
