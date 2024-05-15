@@ -28,8 +28,9 @@
   background-position: 0 0;
 }
 
-h2 {
+h2, h3 {
   text-align: center;
+  margin: 5px;
 }
 
 .spinBtn {

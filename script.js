@@ -1,4 +1,7 @@
 const rollBtn = document.querySelector(".spinBtn")
+const showMoney = document.querySelector(".slotsMoney")
+const showResult = document.querySelector(".spinResult")
+const playerBet = document.getElementById("playerBid")
 
 const icon_height = 79;
 const num_icons = 9;
@@ -11,7 +14,8 @@ let fruit_indexes = [0, 0, 0];
 * bar = 6 ; lemon = 7 ; melon = 8
 *  */
 
-let slotsMoney = 2000
+let slotsMoney = 2000;
+let betSum = 0;
 
 const roll = (reel, offset = 0) => {
     // Calculation for rotation
@@ -40,6 +44,9 @@ const roll = (reel, offset = 0) => {
 function rollAll() {
     // Select reels
     const reelsList = document.querySelectorAll('.slots > .reel');
+    betSum = playerBet.value
+    slotsMoney -= betSum
+    showResults()
 
     // Promise.all waits until all promises resolve, then returns result as an array
     // [...reelsList] converts from NodeList into array. Worth remembering
@@ -48,7 +55,31 @@ function rollAll() {
         .then((result) => {
             result.forEach((icon, index) => fruit_indexes[index] = (fruit_indexes[index] + icon)%num_icons);
             console.log(fruit_indexes)
+            calculateWin(fruit_indexes)
         })
 }
 
+function showResults() {
+    showMoney.innerHTML = "Money: $"+slotsMoney
+    showResult.innerHTML = ""
+}
+
+function calculateWin(array) {
+    if(array[0] === array[1] || array[0] === array[2] || array[1] === array[2]) {
+        let winnings = betSum * 2;
+        slotsMoney += winnings;
+        showResults()
+        showResult.innerHTML = "You won: $"+winnings
+    } else if(array[0] === array[1] && array[0] === array[2]) {
+        let jackpot = betSum * 10;
+        slotsMoney += jackpot;
+        showResults()
+        showResult.innerHTML = "You won a jackpot: $"+jackpot
+    } else {
+        showResults()
+        showResult.innerHTML = "You lost. Try again."
+    }
+}
+
+showResults()
 rollBtn.onclick = () => rollAll();
